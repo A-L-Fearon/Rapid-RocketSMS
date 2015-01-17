@@ -1,0 +1,112 @@
+from rapidsms.apps.base import AppBase
+from rapidsms.contrib.httptester.storage import get_messages
+from rapidsms.contrib.httptester.storage import get_numbers
+import httplib, base64, urllib2, requests, json
+from django.db import models
+#from rapidsms.extras.csrf_migration_helper import Template
+class RocketCheck(AppBase):
+
+    #IT WOOOORKS !!!!
+    def handle(self, msg):
+    	if msg.text == 'fearless':
+		messages = get_numbers()
+		cnt = messages.count()  #out of bounds
+		print cnt
+		cnt = cnt - 1
+		number = messages.reverse()[cnt]
+		print number
+		#Template()
+		#number = msg.connection[:msg.connection.index(' ')]
+		#print number 
+	     	#p = {'from':'Fearon', 'to': number, 'message':' testing '}
+	     	url = 'https://api.rocketsms.co/1.0/sms/send'
+	     #params = urllib.urlencode({'name':'testing'})
+	     #base64string = base64.encodestring('%s:%s' % (msb-focus, MsbFocus321$)).replace('\n', '')
+             #r = urllib2.request(url)
+             #r.add_header("Authorization", "Basic %s" % base64string)
+	     #r = 2
+	     	#r = requests.post(url, auth=('msb-focus','MsbFocus321$'),data=p)
+		msg.respond(msg.connection.identity)	     	
+		#msg.respond(r.status_code)
+	     #r.raise_for_status()
+	     	return True 
+	return False
+
+
+
+	def send_sms(text):
+		msg_history = get_numbers()
+		hist_len = messages.count()  #out of bounds
+		c_num = hist_len - 1
+		number = messages[c_num]
+	     	p = {'from':'PATH', 'to': number, 'message': text}
+		url = 'https://api.rocketsms.co/1.0/sms/send'
+		request = requests.post(url, auth=('msb-focus','MsbFocus321$'),data=p)
+		msg.respond(r.status_code)
+	    	return True
+        return False	
+
+
+
+
+
+    #def send_sms(text):
+	#if msg.text == 'fearless':
+	    #msg.respond('POST')
+	 #   headers = {"Content-type": "application/json"}
+	    #params = urllib.urlencode({'@to': '12524', '@from': '53421', '@message': 'Is it wworking ?'})
+	  #  params = urllib.urlencode({'@name': 'testing'})
+	   # conn = httplib.HTTPSConnection( "api.rocketsms.co" )
+	    #base64string = base64.encodestring('%s:%s' % (msb-focus, MsbFocus321$)).replace('\n', '')
+	    #conn.request("POST", "/1.0/group", params)
+	    #conn.add_header("Authorization", "Basic %s" % base64string)
+	    #response = conn.getresponse()
+            #string = response
+	    #msg.respond(response.status)
+	    #return True
+        #return False
+
+
+
+
+
+#request = urllib2.Request("http://api.foursquare.com/v1/user")
+#base64string = base64.encodestring('%s:%s' % (username, password)).replace('\n', '')
+#request.add_header("Authorization", "Basic %s" % base64string)   
+#result = urllib2.urlopen(request)
+
+#formz
+#import httplib ,urllib
+#username ="myusername"
+#password="mypassword"
+#headers = {"Content-type": "application/x-www-form-urlencoded"}
+#params = urllib.urlencode({'@to': '12524', '@from': '53421', '@message': 'Is it wworking ?'})
+#conn = httplib.HTTPSConnection( "https://api.rocketsms.co" )
+#print conn
+#conn.request("POST", "/1.0", params)
+#response = conn.getresponse()
+#print response
+
+
+#import urllib2, base64
+#request = urllib2.Request("http://api.foursquare.com/v1/user")
+#base64string = base64.encodestring('%s:%s' % (username, password)).replace('\n', '')
+#request.add_header("Authorization", "Basic %s" % base64string)   
+#result = urllib2.urlopen(request)
+
+
+
+#import httplib2
+#h = httplib2.Http(".cache")
+#h.add_credentials('name', 'password')
+#response, content = h.request("https://example.org/chap/2", "POST", body="This is text", headers={'content-type':'text/plain'} )
+
+#import urllib.parse
+#import httplib2
+
+#http = httplib2.Http()
+
+#url = 'http://www.example.com/login'   
+#body = {'USERNAME': 'foo', 'PASSWORD': 'bar'}
+#headers = {'Content-type': 'application/x-www-form-urlencoded'}
+#response, content = http.request(url, 'POST', headers=headers, body=urllib.parse.urlencode(body))
